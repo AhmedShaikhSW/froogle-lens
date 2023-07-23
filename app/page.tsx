@@ -1,5 +1,6 @@
-import Image from 'next/image'
-import { CssVarsProvider, extendTheme } from '@mui/joy/styles';
+import { CssVarsProvider } from '@mui/joy/styles';
+import Grid from '@mui/joy/Grid';
+import ImageUploader from './ImageUploader';
 
 export default function Home() {
   return (
@@ -94,6 +95,21 @@ export default function Home() {
             </p>
           </a>
         </div> */}
+
+        <Grid container spacing={4} sx={{ flexGrow: 1, width: '100%' }}>
+          <Grid xs={12}>
+            <h1>xs=8</h1>
+          </Grid>
+
+          <Grid xs={6}>
+            <ImageUploader />
+          </Grid>
+
+          <Grid xs={6}>
+            <h1>xs=4</h1>
+          </Grid>
+        </Grid>
+
       </main>
     </CssVarsProvider>
   )
