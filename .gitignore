@@ -18,6 +18,7 @@
 # misc
 .DS_Store
 *.pem
+api/__pycache__
 
 # debug
 npm-debug.log*
@@ -26,6 +27,8 @@ yarn-error.log*
 
 # local env files
 .env*.local
+/api/venv
+.vscode
 
 # vercel
 .vercel
