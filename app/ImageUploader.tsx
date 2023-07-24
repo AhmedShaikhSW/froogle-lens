@@ -49,8 +49,29 @@ export default function ImageUploader() {
         </li>
     ));
 
+    const handleClick = async() => {
+        if(acceptedFiles.length > 0) {
+
+            const formData = new FormData();
+            formData.append('image', acceptedFiles[0]);
+
+            const res = await fetch('http://127.0.0.1:5000/upload', {
+                body: formData,
+                method: 'POST',
+            });
+
+            const data = await res.json();
+            console.log(data);
+
+        } else {
+
+            console.log("No files selected");
+
+        }
+    };
+
     return (
-        <Card variant="outlined" sx={{ width: '100%' }}>
+        <Card variant="outlined" sx={{ width: '100%', height: '100%' }}>
             <section className="container p-4">
                 <div {...getRootProps({className: 'dropzone flex justify-center border border-dashed border-2 border-gray-700 rounded-md p-16'})}>
                     <div>
@@ -86,7 +107,7 @@ export default function ImageUploader() {
             </section>
 
             <CardActions>
-                <Button variant="outlined" color="primary">Classify!</Button>
+                <Button variant="outlined" color="primary" onClick={handleClick}>Classify!</Button>
             </CardActions>
         </Card>
     );
