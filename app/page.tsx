@@ -12,15 +12,15 @@ export default function Home() {
         </div>
 
         <Grid container spacing={4} sx={{ flexGrow: 1, width: '100%' }}>
-          <Grid xs={12} md={8} sx={{ minWidth: '100%'}}>
+          <Grid xs={12} sx={{ minWidth: '100%'}}>
             <h1>xs=8</h1>
           </Grid>
 
-          <Grid xs={6} md={6} sx={{ height: '100%', minWidth: {md: 'auto', sm: '100%', xs: '100%'}}}>
+          <Grid xs={6} sx={{ height: '100%', minWidth: {md: 'auto', sm: '100%', xs: '100%'}}}>
             <ImageUploader />
           </Grid>
 
-          <Grid xs={6} md={6} sx={{ height: '100%', minWidth: {md: 'auto', sm: '100%', xs: '100%'}}}>
+          <Grid xs={6} sx={{ height: '100%', minWidth: {md: 'auto', sm: '100%', xs: '100%'}}}>
             <ResultsLoader />
           </Grid>
         </Grid>
