@@ -51,22 +51,19 @@ export default function ImageUploader() {
 
     const handleClick = async() => {
         if(acceptedFiles.length > 0) {
-
             const formData = new FormData();
             formData.append('image', acceptedFiles[0]);
 
-            const res = await fetch('http://127.0.0.1:5000/upload', {
+            const res = await fetch('http://127.0.0.1:5000/classify', {
                 body: formData,
                 method: 'POST',
             });
 
             const data = await res.json();
             console.log(data);
-
+            console.log("Image classification complete!");
         } else {
-
             console.log("No files selected");
-
         }
     };
 
