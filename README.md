@@ -84,7 +84,7 @@ I welcome contributions to Froogle Lens! If you find a bug or have an enhancemen
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE.md).
 
 ## Acknowledgments
 
