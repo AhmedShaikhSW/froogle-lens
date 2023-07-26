@@ -22,7 +22,9 @@ function fileSizeValidator(file: FileWithPath) {
 }
 
 export default function ImageUploader() {
-    const { acceptedFiles, getRootProps, getInputProps, fileRejections } = useDropzone({
+    const [ buttonLoading, setButtonLoading ] = React.useState(false);
+
+    const { acceptedFiles, getRootProps, getInputProps, fileRejections, isDragActive } = useDropzone({
         accept: {
             "image/png": [".png"],
             "image/jpeg": [".jpg", ".jpeg"],
@@ -51,6 +53,8 @@ export default function ImageUploader() {
 
     const handleClick = async() => {
         if(acceptedFiles.length > 0) {
+            setButtonLoading(true);
+
             const formData = new FormData();
             formData.append('image', acceptedFiles[0]);
 
@@ -62,6 +66,8 @@ export default function ImageUploader() {
             const data = await res.json();
             console.log(data);
             console.log("Image classification complete!");
+
+            setButtonLoading(false);
         } else {
             console.log("No files selected");
         }
@@ -73,9 +79,16 @@ export default function ImageUploader() {
                 <div {...getRootProps({className: 'dropzone flex justify-center border border-dashed border-2 border-gray-700 rounded-md p-16'})}>
                     <div>
                         <input {...getInputProps()} />
-                        <Link level="h6" variant="soft" sx={{ textAlign: 'center' }}>
-                            Drag an image, or click to upload.
-                        </Link>
+                        {
+                            isDragActive ?
+                                <Typography level="h6" variant="soft" sx={{ textAlign: 'center' }}>
+                                    Drop it like it&apos;s hot!
+                                </Typography>
+                                :
+                                <Link level="h6" variant="soft" sx={{ textAlign: 'center' }}>
+                                    Drag an image, or click to upload.
+                                </Link>
+                        }
                         <Typography level="body3" textTransform={"uppercase"} sx={{ textAlign: 'center', margin: '0.5em' }}>Only PNG, JPG, or JPEG. Max: 5 MB</Typography>
                     </div>
                 </div>
@@ -104,7 +117,7 @@ export default function ImageUploader() {
             </section>
 
             <CardActions>
-                <Button variant="outlined" color="primary" onClick={handleClick}>Classify!</Button>
+                <Button variant="outlined" color="primary" disabled={acceptedFiles.length < 1} loading={buttonLoading} onClick={handleClick}>Classify!</Button>
             </CardActions>
         </Card>
     );
