@@ -1,3 +1,9 @@
+"""
+Flask Froogle Lens Image Classification API
+This Flask app provides an API for image classification using a simple pre-trained MobileNetV2 model.
+"""
+
+# Importing required modules
 from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 from PIL import Image
@@ -21,6 +27,7 @@ load_dotenv()
 # Initialize the Redis connection
 r = redis.from_url(os.getenv("REDIS_URL"))
 
+# Create a Flask app and enable Cross-Origin Resource Sharing (CORS)
 app = Flask(__name__)
 CORS(app)
 
@@ -34,9 +41,13 @@ except Exception as e:
 model = MobileNetV2(weights="imagenet")
 
 
-# Define the /classify route
 @app.route("/classify", methods=["POST"])
 def classify():
+    """
+    Image Classification Endpoint
+    This endpoint allows users to upload an image for classification.
+    Returns the top 3 predicted labels with their confidence percentages.
+    """
     if "image" not in request.files:
         return jsonify({"error": "No image provided."}), 400
 
@@ -85,15 +96,17 @@ def classify():
         response_data = {"message": "Error running image classification."}
         status_code = 500
 
-    # Return success response
     return Response(
         json.dumps(response_data), status=status_code, mimetype="application/json"
     )
 
 
-# Define the /results route
 @app.route("/results", methods=["GET"])
 def results():
+    """
+    Image Classification Results Endpoint
+    This endpoint returns the results of image classification from the database.
+    """
     try:
         # Get the results from Redis
         results = json.loads(
@@ -109,11 +122,11 @@ def results():
         response_data = {"message": "Error getting image classification results."}
         status_code = 500
 
-    # Return success response
     return Response(
         json.dumps(response_data), status=status_code, mimetype="application/json"
     )
 
 
 if __name__ == "__main__":
+    # Run the Flask app on host "0.0.0.0" and port 5000
     app.run(host="0.0.0.0", port=5000)
