@@ -58,7 +58,7 @@ export default function ImageUploader() {
             const formData = new FormData();
             formData.append('image', acceptedFiles[0]);
 
-            const res = await fetch('http://127.0.0.1:5000/classify', {
+            const res = await fetch('http://0.0.0.0:5000/classify', {
                 body: formData,
                 method: 'POST',
             });

@@ -24,7 +24,7 @@ export default function ResultsLoader() {
 
     React.useEffect(() => {
         async function fetchData() {
-            const response = await fetch('http://127.0.0.1:5000/results', {
+            const response = await fetch('http://0.0.0.0:5000/results', {
                 method: 'GET',
             });
 
