@@ -23,11 +23,11 @@ export default function RootLayout({
         <Header 
           logo={
             <Image
-              src="/vercel.svg"
+              src="/froogle-logo.svg"
               alt="Froogle Lens Logo"
               className="dark:invert"
-              width={100}
-              height={24}
+              width={25}
+              height={25}
               priority
             />
           }
