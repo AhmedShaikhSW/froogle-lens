@@ -72,13 +72,11 @@ At root of project, run:
 
 ## Screenshots
 
-Normal:
+App desktop view for wide displays:
+<img src="public/View-1.png" alt="Screenshot of app"/>
 
-<img src="public/View-1.png>
-
-Responsive:
-
-<img src="public/View-2.png>
+App responsive view for narrow displays:
+<img src="public/View-2.png" alt="Screenshot of app"/>
 
 ## Contributing
 
