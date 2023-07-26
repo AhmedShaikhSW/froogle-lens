@@ -1,4 +1,10 @@
 'use client'
+/**
+ * ImageUploader Component
+ * This component allows users to upload images and performs image classification.
+ */
+
+// Importing required modules and components
 import React from 'react'
 import Typography from '@mui/joy/Typography'
 import Card from '@mui/joy/Card'
@@ -10,8 +16,15 @@ import ListItemDecorator from '@mui/joy/ListItemDecorator'
 import Button from '@mui/joy/Button'
 import { useDropzone, FileWithPath, FileRejection } from 'react-dropzone'
 
-const maxFileSize = 5 * 1000 * 1000 // 5MB
+// Maximum file size in bytes, 5 MB
+const maxFileSize = 5 * 1000 * 1000
 
+/**
+ * Validator function to check if the file size exceeds the maximum allowed.
+ *
+ * @param {FileWithPath} file - The file object to be validated.
+ * @returns {Object|null} An object with the error code and message if validation fails, null otherwise.
+ */
 function fileSizeValidator(file: FileWithPath) {
   if (file.size > maxFileSize) {
     return {
@@ -23,6 +36,12 @@ function fileSizeValidator(file: FileWithPath) {
   }
 }
 
+/**
+ * ImageUploader Component
+ * This component allows users to upload images and performs image classification.
+ *
+ * @returns {JSX.Element} The rendered ImageUploader component.
+ */
 export default function ImageUploader() {
   const [buttonLoading, setButtonLoading] = React.useState(false)
 
@@ -40,15 +59,17 @@ export default function ImageUploader() {
     },
     maxFiles: 1,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    validator: fileSizeValidator as any,
+    validator: fileSizeValidator as any, // Type error in react-dropzone, using any for now
   })
 
+  // Generating list items for accepted files
   const acceptedFileItems = acceptedFiles.map((file: FileWithPath) => (
     <li key={file.path}>
       {file.path}, {(file.size / 1000).toFixed(2)} KB
     </li>
   ))
 
+  // Generating list items for file rejections with error messages
   const fileRejectionItems = fileRejections.map(
     ({ file, errors }: FileRejection) => (
       <li key={(file as FileWithPath).path}>
@@ -62,6 +83,11 @@ export default function ImageUploader() {
     )
   )
 
+  /**
+   * Handle Click Event
+   * This function is called when the "Classify!" button is clicked.
+   * It sends the uploaded image to the server for classification.
+   */
   const handleClick = async () => {
     if (acceptedFiles.length > 0) {
       setButtonLoading(true)
@@ -95,6 +121,8 @@ export default function ImageUploader() {
         >
           <div>
             <input {...getInputProps()} />
+
+            {/* Conditional rendering based on drag active state */}
             {isDragActive ? (
               <Typography
                 level="h6"
@@ -108,6 +136,7 @@ export default function ImageUploader() {
                 Drag an image, or click to upload.
               </Link>
             )}
+
             <Typography
               level="body3"
               textTransform={'uppercase'}
@@ -117,12 +146,15 @@ export default function ImageUploader() {
             </Typography>
           </div>
         </div>
+
         <aside className="mt-4">
+          {/* Displaying accepted files if any */}
           {acceptedFileItems.length > 0 && (
             <div>
               <Typography level="body3" textTransform={'uppercase'}>
                 File
               </Typography>
+
               <List sx={{ '--ListItemDecorator-size': '8px' }}>
                 <ListItem sx={{ fontSize: 'sm' }}>
                   <ListItemDecorator sx={{ mr: '1em' }}>✅</ListItemDecorator>
@@ -131,6 +163,8 @@ export default function ImageUploader() {
               </List>
             </div>
           )}
+
+          {/* Displaying file rejections with errors if any */}
           {fileRejectionItems.length > 0 && (
             <div>
               <Typography
@@ -140,6 +174,7 @@ export default function ImageUploader() {
               >
                 Error
               </Typography>
+
               <List sx={{ '--ListItemDecorator-size': '8px' }}>
                 <ListItem color="danger" sx={{ fontSize: 'sm' }}>
                   <ListItemDecorator sx={{ mr: '1em' }}>❌</ListItemDecorator>
