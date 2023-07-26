@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "@mui/joy/Typography";
+import Link from "@mui/joy/Link";
 
 export default function Header({
     logo, title
@@ -9,22 +9,21 @@ export default function Header({
 }) {
     return (
         <header className="flex items-center justify-center p-4 mt-4">
-            <div className="flex fixed w-screen justify-center p-2 border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30 sm:mt-2">
-                <div className="mt-6 mr-4">{logo}</div>
-                <Typography
-                    level="h1"
-                    color="neutral"
+            <div className="flex items-center fixed w-screen justify-center space-x-2 p-2 border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/10">
+                <div>{logo}</div>
+                <Link
+                    level="h4"
                     fontFamily={"inherit"}
-                    fontWeight={"bold"}
+                    fontWeight={900}
+                    textTransform={"uppercase"}
+                    underline="none"
+                    href="#"
                     sx={{
-                        background: "linear-gradient(to right bottom, #2E73E7, #54CBD3)",
-                        WebkitBackgroundClip: "text",
-                        backgroundClip: "text",
-                        color: "transparent",
+                        color: "white"
                     }}
                 >
                     {title}
-                </Typography>
+                </Link>
             </div>
         </header>
     );
