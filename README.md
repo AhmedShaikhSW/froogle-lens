@@ -21,7 +21,7 @@ Froogle Lens is a web app that allows users to upload images and perform image c
   - Material UI
 
 - Backend:
-  - Flask (Python)
+  - Flask (Python, use 3.8.9 or above)
   - TensorFlow
   - Redis
 
@@ -48,6 +48,8 @@ Froogle Lens is a web app that allows users to upload images and perform image c
    Run while in `api` folder:
 
    `pip install -r requirements.txt`
+
+   Important: Tested with Python 3.8.9 and above. Make sure you have the appropriate Python version!
 
 4. Configure `.env` file:
 
