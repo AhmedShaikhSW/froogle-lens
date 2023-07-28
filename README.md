@@ -51,7 +51,12 @@ Froogle Lens is a web app that allows users to upload images and perform image c
 
    Important: Tested with Python 3.8.9 and above. Make sure you have the appropriate Python version!
 
-4. Configure `.env` file:
+   If even after installing from requirements.txt, you are getting ModuleNotFound errors, install the packages manually using this command:
+   `pip install flask flask_cors Pillow python-dotenv redis tensorflow`
+
+   You might want to look at whether you should be using pip3, pip3.8, etc. depending on your installation of Python.
+
+5. Configure `.env` file:
 
    Create a `.env` file at the root of the project, and set `REDIS_URL=<your_redis_connection_string>`.
    Or use the connection string I provided in an email, if applicable.
@@ -69,6 +74,8 @@ At root of project, run:
 ### - Backend
 
 `npm run start-api`
+
+Important: Make sure Flask is using the appropriate Python version (I believe it looks at the version in PATH).
 
 ...and that's it! The app should be running at [http://localhost:3000](http://localhost:3000) now.
 
