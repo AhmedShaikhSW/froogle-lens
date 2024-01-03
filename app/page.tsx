@@ -1,9 +1,8 @@
 /**
  * Home Page Component
- * This is the main landing page of the web app.
+ * Landing page of web app.
  */
 
-// Importing required modules from Material UI and custom components
 import { CssVarsProvider } from '@mui/joy/styles'
 import Grid from '@mui/joy/Grid'
 import Typography from '@mui/joy/Typography'
@@ -12,13 +11,13 @@ import ResultsLoader from './ResultsLoader'
 
 /**
  * Home Component
- * This component represents the home page of the web app.
+ * Represents home page of web app.
  *
- * @returns {JSX.Element} The rendered home page.
+ * @returns {JSX.Element} Rendered home page.
  */
 export default function Home() {
   return (
-    // CssVarsProvider is used to enforce dark mode for Material UI components
+    // Enforce dark mode for Material UI components
     <CssVarsProvider defaultMode="dark">
       <main className="relative flex flex-col items-center justify-between p-4 md:p-24">
         <div
@@ -41,9 +40,8 @@ export default function Home() {
           }}
         ></div>
 
-        {/* Main content wrapped in a Grid container */}
         <Grid container spacing={4} sx={{ flexGrow: 1, width: '100%' }}>
-          {/* Headline section */}
+          {/* Headline text */}
           <Grid xs={12} sx={{ minWidth: '100%', paddingY: '4em' }}>
             <Typography level="h1" fontFamily={'inherit'} fontWeight={'bold'}>
               A frugal version of Google Lens.

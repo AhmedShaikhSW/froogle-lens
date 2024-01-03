@@ -1,10 +1,9 @@
 'use client'
 /**
  * ImageUploader Component
- * This component allows users to upload images and performs image classification.
+ * Performs image classification on user uploaded images.
  */
 
-// Importing required modules and components
 import React from 'react'
 import Typography from '@mui/joy/Typography'
 import Card from '@mui/joy/Card'
@@ -16,14 +15,14 @@ import ListItemDecorator from '@mui/joy/ListItemDecorator'
 import Button from '@mui/joy/Button'
 import { useDropzone, FileWithPath, FileRejection } from 'react-dropzone'
 
-// Maximum file size in bytes, 5 MB
+// Maximum file size in bytes
 const maxFileSize = 5 * 1000 * 1000
 
 /**
- * Validator function to check if the file size exceeds the maximum allowed.
+ * Validator function to check file size.
  *
- * @param {FileWithPath} file - The file object to be validated.
- * @returns {Object|null} An object with the error code and message if validation fails, null otherwise.
+ * @param {FileWithPath} file - File object to be validated.
+ * @returns {Object|null} Object with error code and message if validation fails, null otherwise.
  */
 function fileSizeValidator(file: FileWithPath) {
   if (file.size > maxFileSize) {
@@ -38,9 +37,8 @@ function fileSizeValidator(file: FileWithPath) {
 
 /**
  * ImageUploader Component
- * This component allows users to upload images and performs image classification.
  *
- * @returns {JSX.Element} The rendered ImageUploader component.
+ * @returns {JSX.Element} Rendered ImageUploader component.
  */
 export default function ImageUploader() {
   const [buttonLoading, setButtonLoading] = React.useState(false)
@@ -59,17 +57,17 @@ export default function ImageUploader() {
     },
     maxFiles: 1,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    validator: fileSizeValidator as any, // Type error in react-dropzone, using any for now
+    validator: fileSizeValidator as any, // Type error in react-dropzone version
   })
 
-  // Generating list items for accepted files
+  // Generate list items for accepted files
   const acceptedFileItems = acceptedFiles.map((file: FileWithPath) => (
     <li key={file.path}>
       {file.path}, {(file.size / 1000).toFixed(2)} KB
     </li>
   ))
 
-  // Generating list items for file rejections with error messages
+  // Generate list items for file rejections with error messages
   const fileRejectionItems = fileRejections.map(
     ({ file, errors }: FileRejection) => (
       <li key={(file as FileWithPath).path}>
@@ -85,8 +83,7 @@ export default function ImageUploader() {
 
   /**
    * Handle Click Event
-   * This function is called when the "Classify!" button is clicked.
-   * It sends the uploaded image to the server for classification.
+   * Sends the uploaded image to Flask server for classification.
    */
   const handleClick = async () => {
     if (acceptedFiles.length > 0) {
@@ -95,6 +92,7 @@ export default function ImageUploader() {
       const formData = new FormData()
       formData.append('image', acceptedFiles[0])
 
+      // TODO: Enforce HTTPS and mask API URL
       const res = await fetch('http://0.0.0.0:5000/classify', {
         body: formData,
         method: 'POST',
@@ -148,7 +146,7 @@ export default function ImageUploader() {
         </div>
 
         <aside className="mt-4">
-          {/* Displaying accepted files if any */}
+          {/* Display accepted files if any */}
           {acceptedFileItems.length > 0 && (
             <div>
               <Typography level="body3" textTransform={'uppercase'}>
@@ -164,7 +162,7 @@ export default function ImageUploader() {
             </div>
           )}
 
-          {/* Displaying file rejections with errors if any */}
+          {/* Display file rejections with errors if any */}
           {fileRejectionItems.length > 0 && (
             <div>
               <Typography

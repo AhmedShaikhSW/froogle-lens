@@ -87,6 +87,12 @@ App desktop view for wide displays:
 App responsive view for narrow displays:
 <img src="public/View-2.png" alt="Screenshot of app"/>
 
+## Testing
+
+Run `python -m pytest -vv` at the root of the project to start Flask app unit tests.
+
+Very basic test coverage currently, more robust test coverage on the roadmap.
+
 ## Contributing
 
 I welcome contributions to Froogle Lens! If you find a bug or have an enhancement in mind, please open an issue or submit a pull request.
